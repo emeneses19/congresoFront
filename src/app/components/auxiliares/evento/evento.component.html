@@ -1,0 +1,90 @@
+<div class="formulario-agregar-evento">
+    <div class="cabezera-formulario">
+        <h2 mat-dialog-title> Evento</h2>
+        <mat-dialog-actions>
+            <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
+        </mat-dialog-actions>
+    </div>
+    <div class="formulario-evento">
+        <mat-dialog-content>
+            <div class="mensaje-error">
+                <span>texto error</span>
+            </div>
+            <form class="form" #formulario="ngForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>Código</mat-label>
+                    <input name="codEvento" matInput required="required">
+                    <mat-error>
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input class="campo-no-valido" name="fecha" matInput required minlength="4">
+                    <mat-error>
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                        <ng-container>
+                            El nombre debe tener <strong>al menos 5 caracteres</strong>
+                        </ng-container>
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput></textarea>
+                </mat-form-field>
+                <div class="section_principal">
+                    <mat-form-field class="section__secundario">
+                        <mat-label>Fecha de evento</mat-label>
+                        <input matInput [matDatepicker]="fechaEvento">
+                        <mat-datepicker-toggle matIconSuffix [for]="fechaEvento"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaEvento></mat-datepicker>
+                    </mat-form-field>
+                    <div class=" section__secundario hora">
+                        <mat-label class="custom-label">Hora del evento</mat-label>
+                        <input [ngxTimepicker]="picker" class="custom-input">
+                        <ngx-material-timepicker #picker></ngx-material-timepicker>
+                        <span class="material-icons" (click)="picker.open()">
+                            schedule
+                        </span>
+                    </div>
+                </div>
+                <div class="section_principal">
+                    <div class="section__secundario hora">
+                        <mat-label class="custom-label">Tolerancia</mat-label>
+                        <input [ngxTimepicker]="tolerancia" class="custom-input">
+                        <ngx-material-timepicker #tolerancia></ngx-material-timepicker>
+                        <span class="material-icons" (click)="tolerancia.open()">
+                            schedule
+                        </span>
+                    </div>
+                    <mat-form-field class="section__secundario" appearance="outline">
+                        <mat-label>Duración</mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0">
+                        <span matTextSuffix>Horas</span>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Congreso</mat-label>
+                    <mat-select>
+                        <mat-option value="one">First option</mat-option>
+                        <mat-option value="two">Second option</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-dialog-actions align="end">
+                    <button class="btn-guardar" type="submit" mat-button>Guardar</button>
+                </mat-dialog-actions>
+
+            </form>
+        </mat-dialog-content>
+    </div>
+    <div class="formulario-institucion-procedencia cargando">
+        <img src="../../../../assets/img/cargando2.gif" alt="cargando">
+        <span>Cargando</span>
+    </div>
+</div>

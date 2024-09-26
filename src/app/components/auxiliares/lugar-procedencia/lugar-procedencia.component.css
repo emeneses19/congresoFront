@@ -1,0 +1,80 @@
+.lugarProcedencia {
+    width: 550px;
+    padding: 0 1.2rem;
+}
+
+.cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    mat-icon {
+        color: var(--color-primario);
+    }
+}
+
+.lugarProcedencia__block {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+mat-dialog-content .mensaje-error {
+    text-align: center;
+    margin-bottom: 0.6rem;
+    margin-top: 0px;
+
+    span {
+        background-color: #f3dedf;
+        color: #f44336;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+.lugarProcedencia__block mat-dialog-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-dialog-actions {
+    margin: 0;
+    padding: 0;
+}
+
+mat-dialog-actions .btn-guardar {
+    background-color: var(--color-primario);
+    color: #fcfcfc;
+    width: 156px;
+}
+
+/* estilos de la lsita */
+.lugarProcedencia__block_lista {
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 0.5rem;
+}
+
+/* para el cargando */
+.lugarProcedencia__block_cargando {
+    position: relative;
+}
+
+.lugarProcedencia__block_cargando img {
+    display: block;
+    margin: 0 auto;
+}
+
+.lugarProcedencia__block_cargando span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}

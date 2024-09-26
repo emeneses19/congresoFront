@@ -1,0 +1,41 @@
+.agregar-estado-inscripcion {
+  width: 550px;
+  padding: 0 1.2rem;
+}
+
+.cabezera-estado-inscripcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+      mat-icon{
+          color: var(--color-primario);
+      }
+}
+
+
+.formulario-estado-inscripcion mat-dialog-content form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+mat-dialog-actions .btn-guardar {
+  background-color: var(--color-primario);
+  color: #fcfcfc;
+  width: 156px;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+img{
+  width: 50px;
+  height: 50px;
+}
+
+.cargando{
+  display: flex;
+  justify-content: center;
+}

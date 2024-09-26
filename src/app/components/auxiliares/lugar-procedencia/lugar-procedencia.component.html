@@ -1,0 +1,60 @@
+<div class="lugarProcedencia">
+    <div class="cabecera">
+        <h2 mat-dialog-title>Agregar Institucion Procedencia</h2>
+        <mat-dialog-actions>
+            <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
+        </mat-dialog-actions>
+    </div>
+    <div class="lugarProcedencia__block">
+        <mat-dialog-content>
+            @if (error) {
+            <div class="mensaje-error">
+                <span>{{textoError}}</span>
+            </div>
+            }
+            <form class="form" #formulario="ngForm" *ngIf="!cargando">
+                <mat-form-field appearance="outline">
+                    <mat-label>Código</mat-label>
+                    <input (input)="filtroLugarDeProcedenciaPorCodigo()"
+                        [(ngModel)]="lugarProcedencia.codigoLugarProcedencia" name="codigoLugarProcedencia" matInput
+                        required="required" #codigoLugarProcedencia="ngModel">
+                    <mat-error
+                        *ngIf="codigoLugarProcedencia.invalid && (codigoLugarProcedencia.dirty || codigoLugarProcedencia.touched)">
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input (input)="filtroLugarDeProcedenciaPorNombre()" class="campo-no-valido"
+                        [(ngModel)]="lugarProcedencia.nombre" name="nombre" matInput required minlength="4"
+                        #nombre="ngModel">
+                    <mat-error *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <ng-container *ngIf="nombre.errors?.['required']">Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                        <ng-container *ngIf="nombre.errors?.['minlength']">
+                            El nombre debe tener <strong>al menos 5 caracteres</strong>
+                        </ng-container>
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-dialog-actions align="end">
+                    <button class="btn-guardar" type="submit" mat-button (click)="guardar(formulario)">Guardar</button>
+                </mat-dialog-actions>
+            </form>
+        </mat-dialog-content>
+    </div>
+    <div *ngIf="cargando" class="lugarProcedencia__block_cargando">
+        <img src="../../../../assets/img/cargando2.gif" alt="cargando">
+        <span>Cargando</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="lugarProcedencia__block_lista">
+        <app-lista-lugar-procedencia [listaDeLugaresDeProcedencia]="listaDeLugaresDeProcedencia"
+            (lugarProcedenciaEliminar)="eliminarLugarDeProcedencia($event)"
+            (lugarProcedenciaActualizar)="recibiendoLugarDeProcedencia($event)">
+        </app-lista-lugar-procedencia>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+.formulario-agregar-evento {
+    width: 700px;
+    padding: 0 1.2rem;
+}
+.cabezera-formulario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+        mat-icon{
+            color: var(--color-primario);
+        }
+}
+.formulario-evento{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+mat-dialog-content .mensaje-error{
+    text-align: center;    
+    margin-bottom: 0.6rem;
+    margin-top: 0px;
+    span{
+        background-color: #f3dedf;
+        color: #f44336;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold; 
+    }  
+}
+
+.formulario-evento mat-dialog-content form{
+    display: flex;
+    flex-direction: column;
+}
+mat-form-field, .section_principal {
+    width: 100%;
+}
+mat-dialog-actions{
+    margin: 0;
+    padding: 0;
+}
+
+mat-dialog-actions .btn-guardar {
+    background-color: var(--color-primario);
+    color: #fcfcfc;
+    width: 156px;
+}
+/* para el cargando */
+.cargando {
+    position: relative;
+  }
+  
+  .cargando img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .cargando span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .section_principal {
+    display: flex;
+    justify-content: space-between; /* Coloca espacio entre los elementos secundarios */
+    gap: 20px; /* Espacio entre las dos columnas */
+  }
+  
+  .section__secundario {
+    flex: 1; /* Hace que ambos elementos ocupen el mismo ancho */
+  }
+  
+  .hora {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+
+  
+  .material-icons {
+    position: absolute;
+    right: 10px;
+    transform: translateY(50%); 
+    font-size: 29px;
+    cursor: pointer;
+    color: #707070;
+  }
+
+  .hora input{
+    border: 2px solid #b0b0b0; /* Borde inferior morado */
+    font-size: 16px;
+    z-index: auto;
+    height: 56px;
+    padding-left: 1.2rem;
+    border-radius: 0.2rem;
+  }
+
+  .hora input:focus{
+    outline: none; /* Elimina el borde al hacer focus */
+    border: 2px solid #3f51b5; /* Cambia el color del borde al hacer focus */
+  }
+
+  .custom-label {
+    position: absolute;
+    top: -10px; /* Ajusta esta distancia para que el label quede justo encima del input */
+    left: 10px; /* Ajusta la distancia desde el borde izquierdo */
+    background-color: white; /* Fondo para que no se sobreponga con el borde */
+    padding: 0 5px; /* Espacio alrededor del label */
+    font-size: 12px; /* Ajusta el tamaño del label */
+    z-index: 1; /* Asegura que el label esté encima del input */
+  }
+
+  

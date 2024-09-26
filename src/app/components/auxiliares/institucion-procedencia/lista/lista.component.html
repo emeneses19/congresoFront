@@ -1,0 +1,31 @@
+
+<div class="no-datos"  *ngIf="listaDeInstitucionesDeProcedencia.length <=0">
+    <span>¡No hay datos!</span>
+</div>
+<table *ngIf="listaDeInstitucionesDeProcedencia.length>0" class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let institucionProcedencia of listaDeInstitucionesDeProcedencia">
+            <td>
+                <button (click)="eliminarInstitucionProcedencia(institucionProcedencia)" matTooltip="Eliminar" mat-icon-button color="warn"
+                    aria-label="delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="institucionProcedenciaActualizar.emit(institucionProcedencia)" matTooltip="Editar" mat-icon-button style="color: var( --color-primario);" aria-label="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>{{institucionProcedencia.codProcedencia}}</td>
+            <td> {{institucionProcedencia.nombre}}</td>
+        </tr>
+ 
+    </tbody>
+</table>

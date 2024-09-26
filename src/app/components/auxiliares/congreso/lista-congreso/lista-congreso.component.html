@@ -1,0 +1,37 @@
+<div *ngIf="listaDeCongreso.length <=0" class="no-datos">
+    <span>¡No hay datos!</span>
+</div>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Abierto</th>
+            <th scope="col">Fecha de apertura</th>
+            <th scope="col">Fecha de cierre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let congreso of listaDeCongreso">
+            <td>
+                <button (click)="eliminarCongreso(congreso)" matTooltip="Eliminar" mat-icon-button
+                    color="warn" aria-label="delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="congresoActualizar.emit(congreso)" matTooltip="Editar" mat-icon-button
+                    style="color: var( --color-primario);" aria-label="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>{{congreso.codigoCongreso}}</td>
+            <td> {{congreso.nombre}}</td>
+            <td> {{congreso.abierto}}</td>
+            <td> {{congreso.fechaApertura | date: "dd-MM-yyyy"}}</td>
+            <td> {{congreso.fechaCierre | date: "dd-MM-yyyy" }}</td>
+        </tr>
+
+    </tbody>
+
+</table>

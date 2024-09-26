@@ -1,0 +1,30 @@
+<div *ngIf="listaDeLugaresDeProcedencia.length < 0" class="no-datos">
+    <span>¡No hay datos!</span>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let lugarProcedencia of listaDeLugaresDeProcedencia">
+            <td>
+                <button (click)="eliminarLugarProcedencia(lugarProcedencia)" matTooltip="Eliminar" mat-icon-button
+                    color="warn" aria-label="delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="lugarProcedenciaActualizar.emit(lugarProcedencia)" matTooltip="Editar" mat-icon-button
+                    style="color: var( --color-primario);" aria-label="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>{{lugarProcedencia.codigoLugarProcedencia}}</td>
+            <td> {{lugarProcedencia.nombre}}</td>
+        </tr>
+
+    </tbody>
+
+</table>

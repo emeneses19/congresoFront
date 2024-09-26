@@ -1,0 +1,60 @@
+<div class="agregar-institucion-procedencia">
+    <div class="cabezera-formulario">
+        <h2 mat-dialog-title>Agregar Institucion Procedencia</h2>
+        <mat-dialog-actions>
+                <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
+        </mat-dialog-actions>
+    </div>
+    <div class="formulario-institucion-procedencia">
+        <mat-dialog-content>
+            @if (error) {
+            <div class="mensaje-error">
+                <span>{{textoError}}</span>
+            </div>
+            }
+            <form class="form" #formulario="ngForm" *ngIf="!cargando">
+                <mat-form-field appearance="outline">
+                    <mat-label>Código</mat-label>
+                    <input (input)="filtroInstitucionesDeProcedenciaPorCodigo()" [(ngModel)]="institucionProcedencia.codProcedencia" name="codProcedencia" matInput
+                        required="required" #codProcedencia="ngModel">
+                    <mat-error *ngIf="codProcedencia.invalid && (codProcedencia.dirty || codProcedencia.touched)">
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input (input)="filtroInstitucionesDeProcedenciaPorNombre()" class="campo-no-valido" [(ngModel)]="institucionProcedencia.nombre" name="nombre" matInput
+                        required minlength="4" #nombre="ngModel">
+                    <mat-error *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <ng-container *ngIf="nombre.errors?.['required']">Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                        <ng-container *ngIf="nombre.errors?.['minlength']">
+                            El nombre debe tener <strong>al menos 5 caracteres</strong>
+                        </ng-container>
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-dialog-actions align="end">
+                    <button class="btn-guardar" type="submit" mat-button (click)="guardar(formulario)">Guardar</button>
+                </mat-dialog-actions>
+
+            </form>
+
+        </mat-dialog-content>
+
+    </div>
+    <div *ngIf="cargando" class="formulario-institucion-procedencia cargando" >
+        <img src="../../../../assets/img/cargando2.gif" alt="cargando">
+        <span>Cargando</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div  class="lista-institucion-procedencia">
+        <app-lista [listaDeInstitucionesDeProcedencia]="listaDeInstitucionesDeProcedencia" 
+                    (institucionProcedenciaEliminar)="eliminarInstitucionDeProcedencia($event)"
+                    (institucionProcedenciaActualizar)="recibiendoInstProcedencia($event)"
+        ></app-lista>
+    </div>
+</div>

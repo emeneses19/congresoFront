@@ -1,0 +1,19 @@
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+    width: 30%;
+
+  }
+
+  .example-button-row .mat-mdc-button-base:hover {
+    background-color: var(--color-primario);
+    transform: translate(-4px) scale(1.01);
+    border: solid 1px #1772b8;
+    color: var(--color-secundario);
+  }
+
+  
+
+  .example-button-row {
+    display: table-cell;
+    max-width: 100%;
+  }

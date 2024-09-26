@@ -1,0 +1,76 @@
+<div class="congreso">
+    <div class="cabecera">
+        <h2 mat-dialog-title>Congreso</h2>
+        <mat-dialog-actions>
+            <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
+        </mat-dialog-actions>
+    </div>
+    <div class="congreso__block">
+        <mat-dialog-content>
+            @if (error) {
+            <div class="mensaje-error">
+                <span>{{textoError}}</span>
+            </div>
+            }
+            <form class="form" #formulario="ngForm" *ngIf="!cargando">
+                <mat-form-field appearance="outline">
+                    <mat-label>Código</mat-label>
+                    <input (input)="filtroCongresoPorCodigo()" [(ngModel)]="congreso.codigoCongreso"
+                        name="codigocongreso" matInput required="required" #codigocongreso="ngModel">
+                    <mat-error *ngIf="codigocongreso.invalid && (codigocongreso.dirty || codigocongreso.touched)">
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input (input)="filtroCongresoPorNombre()" class="campo-no-valido" [(ngModel)]="congreso.nombre"
+                        name="nombre" matInput required minlength="4" #nombre="ngModel">
+                    <mat-error *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <ng-container *ngIf="nombre.errors?.['required']">Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                        <ng-container *ngIf="nombre.errors?.['minlength']">
+                            El nombre debe tener <strong>al menos 5 caracteres</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field> 
+                <mat-form-field>
+                    <mat-label>Fecha de apertura</mat-label>
+                    <input matInput [matDatepicker]="fechaApertura" [(ngModel)]="congreso.fechaApertura" name="fechaApertura" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="fechaApertura"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaApertura></mat-datepicker>
+                </mat-form-field>
+                           
+                <mat-form-field>
+                    <mat-label>Fecha de cierre</mat-label>
+                    <input matInput [matDatepicker]="fechaCierre" [(ngModel)]="congreso.fechaCierre" name="fechaCierre" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="fechaCierre"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaCierre></mat-datepicker>
+                </mat-form-field>
+                           
+                <div>
+                    <mat-label>Abierto </mat-label>
+                    <mat-slide-toggle [(ngModel)]="congreso.abierto" name="abierto"></mat-slide-toggle>
+                </div>
+                <mat-dialog-actions align="end">
+                    <button class="btn-guardar" type="submit" mat-button (click)="guardar(formulario)">Guardar</button>
+                </mat-dialog-actions>
+            </form>
+        </mat-dialog-content>
+    </div>
+    <div *ngIf="cargando" class="congreso__block_cargando">
+        <img src="../../../../assets/img/cargando2.gif" alt="cargando">
+        <span>Cargando</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="congreso__block_lista">
+        <app-lista-congreso  [listaDeCongreso]="listaDeCongresos"
+        (congresoEliminar)="eliminarCongreso($event)"
+        (congresoActualizar)="recibiendoCongreso($event)">
+
+        </app-lista-congreso>
+
+    </div>
+</div>

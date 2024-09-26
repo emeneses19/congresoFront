@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primario: #1772b8;
+    --color-secundario: #f7f9fb;
+    --color-azul: #008aca;
+    --color-verde: #23a86d;
+    --color-negro: #1f1f21;
+    --color-bordes: #ccc;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* para los timepicker */
+.timepicker-overlay {
+    z-index: 1100 !important;
+  }
+  
+  .timepicker-backdrop-overlay {
+    z-index: 1100 !important;
+  }
+  

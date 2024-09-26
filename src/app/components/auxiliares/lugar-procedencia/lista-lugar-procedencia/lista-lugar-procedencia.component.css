@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+table th,
+table td {
+    padding: 8px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: var(--color-secundario);
+    height: 3rem;
+}
+/* cuando no hay datos */
+.no-datos {
+    padding: 1rem; 
+    border: 1px solid #f8bb86;
+    border-radius: 5px; 
+    text-align: center; 
+    background-color: var(--color-secundario); 
+    font-weight: bold; 
+}
+
+
