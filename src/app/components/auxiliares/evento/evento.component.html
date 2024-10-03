@@ -7,13 +7,13 @@
     </div>
     <div class="formulario-evento">
         <mat-dialog-content>
-            <div class="mensaje-error">
+            <div *ngIf="error" class="mensaje-error">
                 <span>texto error</span>
             </div>
             <form class="form" #formulario="ngForm">
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
-                    <input name="codEvento" matInput required="required">
+                    <input [(ngModel)]="evento.codEvento" name="codEvento" matInput required="required">
                     <mat-error>
                         <ng-container>Campo es
                             <strong>obligatorio</strong>
@@ -22,7 +22,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <input class="campo-no-valido" name="fecha" matInput required minlength="4">
+                    <input  [(ngModel)]="evento.nombre" name="nombre" matInput required minlength="4">
                     <mat-error>
                         <ng-container>Campo es
                             <strong>obligatorio</strong>
@@ -35,18 +35,18 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Descripción</mat-label>
-                    <textarea matInput></textarea>
+                    <textarea [(ngModel)]="evento.descripcion" name="descripcion" matInput></textarea>
                 </mat-form-field>
                 <div class="section_principal">
                     <mat-form-field class="section__secundario">
                         <mat-label>Fecha de evento</mat-label>
-                        <input matInput [matDatepicker]="fechaEvento">
+                        <input [(ngModel)]="evento.fecha" name="fecha" matInput [matDatepicker]="fechaEvento" required>
                         <mat-datepicker-toggle matIconSuffix [for]="fechaEvento"></mat-datepicker-toggle>
                         <mat-datepicker #fechaEvento></mat-datepicker>
                     </mat-form-field>
                     <div class=" section__secundario hora">
                         <mat-label class="custom-label">Hora del evento</mat-label>
-                        <input [ngxTimepicker]="picker" class="custom-input">
+                        <input [ngxTimepicker]="picker" class="custom-input" required>
                         <ngx-material-timepicker #picker></ngx-material-timepicker>
                         <span class="material-icons" (click)="picker.open()">
                             schedule
@@ -56,7 +56,7 @@
                 <div class="section_principal">
                     <div class="section__secundario hora">
                         <mat-label class="custom-label">Tolerancia</mat-label>
-                        <input [ngxTimepicker]="tolerancia" class="custom-input">
+                        <input [ngxTimepicker]="tolerancia" class="custom-input" required>
                         <ngx-material-timepicker #tolerancia></ngx-material-timepicker>
                         <span class="material-icons" (click)="tolerancia.open()">
                             schedule
@@ -64,16 +64,15 @@
                     </div>
                     <mat-form-field class="section__secundario" appearance="outline">
                         <mat-label>Duración</mat-label>
-                        <input matInput type="number" class="example-right-align" placeholder="0">
+                        <input [(ngModel)]="evento.duracion" name="duracion" matInput type="number" class="example-right-align" placeholder="0">
                         <span matTextSuffix>Horas</span>
                     </mat-form-field>
                 </div>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Congreso</mat-label>
-                    <mat-select>
-                        <mat-option value="one">First option</mat-option>
-                        <mat-option value="two">Second option</mat-option>
+                    <mat-select [(ngModel)]="evento.congresoIdCongreso" name="congresoIdCongreso" >
+                        <mat-option *ngFor="let congreso of listaDeCongresos">{{congreso.nombre}}-{{congreso.codigoCongreso}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-dialog-actions align="end">
