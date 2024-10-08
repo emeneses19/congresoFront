@@ -14,6 +14,9 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
                     <input [(ngModel)]="evento.codEvento" name="codEvento" matInput required="required">
+                    <span class="material-icons" (click)="generarIdEvento()">
+                        edit
+                    </span>
                     <mat-error>
                         <ng-container>Campo es
                             <strong>obligatorio</strong>
@@ -55,7 +58,8 @@
                 </div>
                 <div class="section_principal">
                     <div class="section__secundario hora">
-                        <mat-label class="custom-label">Tolerancia</mat-label>
+                        <mat-label class="custom-label">Tolerancia hasta
+                        </mat-label>
                         <input [ngxTimepicker]="tolerancia" class="custom-input" required>
                         <ngx-material-timepicker #tolerancia></ngx-material-timepicker>
                         <span class="material-icons" (click)="tolerancia.open()">
@@ -71,12 +75,12 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Congreso</mat-label>
-                    <mat-select [(ngModel)]="evento.congresoIdCongreso" name="congresoIdCongreso" >
-                        <mat-option *ngFor="let congreso of listaDeCongresos">{{congreso.nombre}}-{{congreso.codigoCongreso}}</mat-option>
+                    <mat-select [(ngModel)]="evento.congresoIdCongreso" name="congresoIdCongreso" required >
+                        <mat-option *ngFor="let congreso of listaDeCongresos" [value]="congreso.codigoCongreso">{{congreso.nombre}}-{{congreso.codigoCongreso}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-dialog-actions align="end">
-                    <button class="btn-guardar" type="submit" mat-button>Guardar</button>
+                    <button class="btn-guardar" type="submit" mat-button (click)="guardarEvento(formulario)">Guardar</button>
                 </mat-dialog-actions>
 
             </form>

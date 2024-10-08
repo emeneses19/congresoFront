@@ -15,7 +15,8 @@ export class EventoComponent {
   error: boolean = false;
   cargando: boolean = false;
   evento: EventoModel = new EventoModel(new CongresoModel());
-  listaDeEvento: EventoModel[]= [];
+  listaDeEvento: EventoModel[]= [
+  ];
   eventoActualizar: EventoModel = new EventoModel(new CongresoModel());
   listaDeCongresos: CongresoModel[] = [];
   
@@ -23,6 +24,19 @@ export class EventoComponent {
               private _eventoServices: EventoService
   ) {
     this.obtenerCongresos();
+    this.obtenerEventos();
+  }
+  obtenerEventos(){
+    this._eventoServices.obtenerEvento().subscribe((eventos)=>{
+      this.listaDeEvento = eventos;
+      console.log(this.listaDeEvento);
+    })
+  }
+
+  generarIdEvento(){
+    const timestamp = new Date().getTime().toString();
+    this.evento = new EventoModel(new CongresoModel());
+    this.evento.codEvento = timestamp;
   }
   guardarEvento(form: NgForm){
     if(form.invalid){
@@ -34,10 +48,6 @@ export class EventoComponent {
       this._eventoServices.agregarEvento(this.evento);
       console.log(this.listaDeEvento);
     }
-  }
-
-  selectedCongreso(congreso: CongresoModel){
-    this.evento = new EventoModel(congreso);
   }
 
   obtenerCongresos(){
