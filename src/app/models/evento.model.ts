@@ -4,8 +4,8 @@ import { CongresoModel } from "../models/congreso.model"
 export class EventoModel{
     congresoIdCongreso:string;
     codEvento: string;    
-    fecha: DateTime;
-    tolerancia: DateTime;
+    fecha: Date;
+    tolerancia: Date;
     nombre:string;
     descripcion: string;
     duracion: string;
@@ -13,8 +13,8 @@ export class EventoModel{
     constructor(congreso: CongresoModel){
         this.congresoIdCongreso = congreso.codigoCongreso;
         this.codEvento= '';
-        this.fecha = DateTime.now();
-        this.tolerancia = DateTime.now();
+        this.fecha =  new Date();
+        this.tolerancia = new Date();
         this.nombre = '';
         this.descripcion ='';
         this.duracion = '';

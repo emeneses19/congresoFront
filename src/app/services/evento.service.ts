@@ -11,8 +11,8 @@ export class EventoService {
     {
       congresoIdCongreso: '019995222222',
       codEvento: '20240658',
-      fecha: DateTime.now(),
-      tolerancia: DateTime.now(),
+      fecha: new Date(),
+      tolerancia: new Date(),
       nombre: 'evento 001',
       descripcion: 'esto es la descripcion de evento 001',
       duracion: '12'

@@ -49,9 +49,9 @@
                     </mat-form-field>
                     <div class=" section__secundario hora">
                         <mat-label class="custom-label">Hora del evento</mat-label>
-                        <input [ngxTimepicker]="picker" class="custom-input" required>
-                        <ngx-material-timepicker #picker></ngx-material-timepicker>
-                        <span class="material-icons" (click)="picker.open()">
+                        <input [(ngModel)]="horaEvento" name="hora" [ngxTimepicker]="hora" class="custom-input" required>
+                        <ngx-material-timepicker #hora></ngx-material-timepicker>
+                        <span class="material-icons" (click)="hora.open()">
                             schedule
                         </span>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="section__secundario hora">
                         <mat-label class="custom-label">Tolerancia hasta
                         </mat-label>
-                        <input [ngxTimepicker]="tolerancia" class="custom-input" required>
+                        <input  [(ngModel)]="horaToleranciaEvento" name="horaToleranciaEvento" [ngxTimepicker]="tolerancia" class="custom-input" required>
                         <ngx-material-timepicker #tolerancia></ngx-material-timepicker>
                         <span class="material-icons" (click)="tolerancia.open()">
                             schedule
