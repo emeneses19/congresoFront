@@ -15,7 +15,7 @@ export class EventoComponent {
   error: boolean = false;
   cargando: boolean = false;
   horaEvento: string = '';
-  horaToleranciaEvento: string ='';
+  horaToleranciaEvento: string = '';
   evento: EventoModel = new EventoModel(new CongresoModel());
   listaDeEvento: EventoModel[] = [
   ];
@@ -28,6 +28,14 @@ export class EventoComponent {
     this.obtenerCongresos();
     this.obtenerEventos();
   }
+
+
+  resetearFormulario(){
+    this.evento = new EventoModel(new CongresoModel());
+    this.horaEvento = '';
+    this.horaToleranciaEvento ='';
+  }
+
   obtenerEventos() {
     this._eventoServices.obtenerEvento().subscribe((eventos) => {
       this.listaDeEvento = eventos;
@@ -38,7 +46,7 @@ export class EventoComponent {
   generarIdEvento() {
     const timestamp = new Date().getTime().toString();
     this.evento = new EventoModel(new CongresoModel());
-    this.evento.codEvento = timestamp;
+    this.evento.codigoEvento = timestamp;
   }
   convertirHoraAMPM(hora12: string): { horas: number, minutos: number } {
     let [tiempo, periodo] = hora12.split(' ');
@@ -51,6 +59,18 @@ export class EventoComponent {
     }
 
     return { horas: horas, minutos: minutos };
+  }
+  convertirHoraToleranciaAMPM(horaTolerancia12: string): { horasTolerancia: number, minutosTolerancia: number } {
+    let [tiempoTolerancia, periodoTolerancia] = horaTolerancia12.split(' ');
+    let [_horasTolerancia, _minutosTolerancia] = tiempoTolerancia.split(':').map(Number);
+
+    if (periodoTolerancia === 'PM' && _horasTolerancia < 12) {
+      _horasTolerancia += 12;
+    } else if (periodoTolerancia === 'AM' && _horasTolerancia === 12) {
+      _horasTolerancia = 0;
+    }
+
+    return { horasTolerancia: _horasTolerancia, minutosTolerancia: _minutosTolerancia };
   }
 
   combinarFechaYHora(fecha: Date, horas: number, minutos: number): Date {
@@ -69,11 +89,12 @@ export class EventoComponent {
       const { horas, minutos } = this.convertirHoraAMPM(this.horaEvento);
       const fechaCompleta = this.combinarFechaYHora(this.evento.fecha, horas, minutos);
       this.evento.fecha = fechaCompleta;
-      const {horasTolerancia, minutosTolerancia} = this.convertirHoraAMPM(this.evento.)
+      const { horasTolerancia, minutosTolerancia } = this.convertirHoraToleranciaAMPM(this.horaToleranciaEvento);
+      const fechaCompletaTolerancia = this.combinarFechaYHora(this.evento.fecha, horasTolerancia, minutosTolerancia)
+      this.evento.tolerancia = fechaCompletaTolerancia;
       this._eventoServices.agregarEvento(this.evento);
       console.log(this.listaDeEvento);
-      console.log(fechaCompleta);
-      console.log(this.horaEvento);
+      this.resetearFormulario();
     }
   }
 

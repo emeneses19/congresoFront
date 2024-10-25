@@ -10,7 +10,7 @@ export class EventoService {
   listaEvento: EventoModel[] = [
     {
       congresoIdCongreso: '019995222222',
-      codEvento: '20240658',
+      codigoEvento: '20240658',
       fecha: new Date(),
       tolerancia: new Date(),
       nombre: 'evento 001',
@@ -41,7 +41,7 @@ export class EventoService {
     return of(this.listaEvento);
   }
   filtroEventoPorCodigo(codigoIngresado: string): Observable<EventoModel[]>{
-    const listaEventoFiltrada = this.listaEvento.filter(evento => evento.codEvento.includes(codigoIngresado));
+    const listaEventoFiltrada = this.listaEvento.filter(evento => evento.codigoEvento.includes(codigoIngresado));
     if (listaEventoFiltrada.length > 0) {
       return of(listaEventoFiltrada);      
     }

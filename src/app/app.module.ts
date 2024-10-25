@@ -22,6 +22,7 @@ import { ListaLugarProcedenciaComponent } from './components/auxiliares/lugar-pr
 import { EventoComponent } from './components/auxiliares/evento/evento.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ListaCongresoComponent } from './components/auxiliares/congreso/lista-congreso/lista-congreso.component';
+import { ListaEventoComponent } from './components/auxiliares/evento/lista-evento/lista-evento.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ListaCongresoComponent } from './components/auxiliares/congreso/lista-c
     ListaLugarProcedenciaComponent,
     EventoComponent,
     InicioComponent,
-    ListaCongresoComponent
+    ListaCongresoComponent,
+    ListaEventoComponent
   ],
   imports: [
     BrowserModule,

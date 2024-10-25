@@ -116,4 +116,7 @@ mat-dialog-actions .btn-guardar {
     z-index: 1; /* Asegura que el label esté encima del input */
   }
 
+  .btn-generadrCodigo{
+    margin-top: -15px;
+  }
   

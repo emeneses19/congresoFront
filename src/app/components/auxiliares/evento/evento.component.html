@@ -13,8 +13,8 @@
             <form class="form" #formulario="ngForm">
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
-                    <input [(ngModel)]="evento.codEvento" name="codEvento" matInput required="required">
-                    <span class="material-icons" (click)="generarIdEvento()">
+                    <input [(ngModel)]="evento.codigoEvento" name="codigoEvento" matInput required="required">
+                    <span class="material-icons btn-generadrCodigo" (click)="generarIdEvento()">
                         edit
                     </span>
                     <mat-error>
@@ -46,6 +46,11 @@
                         <input [(ngModel)]="evento.fecha" name="fecha" matInput [matDatepicker]="fechaEvento" required>
                         <mat-datepicker-toggle matIconSuffix [for]="fechaEvento"></mat-datepicker-toggle>
                         <mat-datepicker #fechaEvento></mat-datepicker>
+                        <mat-error>
+                            <ng-container>Campo es
+                                <strong>obligatorio</strong>
+                            </ng-container>
+                        </mat-error>
                     </mat-form-field>
                     <div class=" section__secundario hora">
                         <mat-label class="custom-label">Hora del evento</mat-label>
@@ -54,6 +59,11 @@
                         <span class="material-icons" (click)="hora.open()">
                             schedule
                         </span>
+                        <mat-error *ngIf="horaEvento == ''" >
+                            <ng-container>Campo es
+                                <strong>obligatorio</strong>
+                            </ng-container>
+                        </mat-error>
                     </div>
                 </div>
                 <div class="section_principal">
@@ -65,10 +75,15 @@
                         <span class="material-icons" (click)="tolerancia.open()">
                             schedule
                         </span>
+                        <mat-error *ngIf="horaToleranciaEvento == ''" >
+                            <ng-container>Campo es
+                                <strong>obligatorio</strong>
+                            </ng-container>                            
+                        </mat-error>
                     </div>
                     <mat-form-field class="section__secundario" appearance="outline">
                         <mat-label>Duración</mat-label>
-                        <input [(ngModel)]="evento.duracion" name="duracion" matInput type="number" class="example-right-align" placeholder="0">
+                        <input [(ngModel)]="evento.duracion" name="duracion" matInput type="number"  placeholder="0">
                         <span matTextSuffix>Horas</span>
                     </mat-form-field>
                 </div>
@@ -78,6 +93,11 @@
                     <mat-select [(ngModel)]="evento.congresoIdCongreso" name="congresoIdCongreso" required >
                         <mat-option *ngFor="let congreso of listaDeCongresos" [value]="congreso.codigoCongreso">{{congreso.nombre}}-{{congreso.codigoCongreso}}</mat-option>
                     </mat-select>
+                    <mat-error >
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
                 </mat-form-field>
                 <mat-dialog-actions align="end">
                     <button class="btn-guardar" type="submit" mat-button (click)="guardarEvento(formulario)">Guardar</button>
@@ -86,8 +106,11 @@
             </form>
         </mat-dialog-content>
     </div>
-    <div class="formulario-institucion-procedencia cargando">
+    <div class="formulario-evento cargando">
         <img src="../../../../assets/img/cargando2.gif" alt="cargando">
         <span>Cargando</span>
+    </div>
+    <div class="section_lista">
+        <app-lista-evento></app-lista-evento>
     </div>
 </div>
