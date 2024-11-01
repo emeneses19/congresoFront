@@ -5,12 +5,14 @@ import { CongresoModel } from '../../../models/congreso.model';
 import { CongresoService } from '../../../services/congreso.service';
 import { NgForm } from '@angular/forms';
 import { EventoService } from '../../../services/evento.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.component.html',
   styleUrl: './evento.component.css'
 })
 export class EventoComponent {
+
   textoError: string = '';
   error: boolean = false;
   cargando: boolean = false;
@@ -25,15 +27,15 @@ export class EventoComponent {
   constructor(private _congresoServices: CongresoService,
     private _eventoServices: EventoService
   ) {
-    this.obtenerCongresos();
     this.obtenerEventos();
+    this.obtenerCongresos();
   }
 
 
-  resetearFormulario(){
+  resetearFormulario() {
     this.evento = new EventoModel(new CongresoModel());
     this.horaEvento = '';
-    this.horaToleranciaEvento ='';
+    this.horaToleranciaEvento = '';
   }
 
   obtenerEventos() {
@@ -79,22 +81,65 @@ export class EventoComponent {
     return fechaConHora;
   }
 
+
+  mensajeDeExito() {
+    Swal.fire({
+      text: `El registro se ha guardado exitosamente.`,
+      icon: 'success',
+      width: 400,
+      confirmButtonColor: "#1772b8",
+    });
+  }
+
   guardarEvento(form: NgForm) {
     if (form.invalid) {
       this.error = true;
       this.textoError = 'Formulario incorrecto. Por favor, revíselo.';
       return;
     } else {
-      this.error = false;
-      const { horas, minutos } = this.convertirHoraAMPM(this.horaEvento);
-      const fechaCompleta = this.combinarFechaYHora(this.evento.fecha, horas, minutos);
-      this.evento.fecha = fechaCompleta;
-      const { horasTolerancia, minutosTolerancia } = this.convertirHoraToleranciaAMPM(this.horaToleranciaEvento);
-      const fechaCompletaTolerancia = this.combinarFechaYHora(this.evento.fecha, horasTolerancia, minutosTolerancia)
-      this.evento.tolerancia = fechaCompletaTolerancia;
-      this._eventoServices.agregarEvento(this.evento);
-      console.log(this.listaDeEvento);
-      this.resetearFormulario();
+
+      const codigoExistente = this.listaDeEvento
+        .find(evento => evento.codigoEvento === this.evento.codigoEvento);
+
+      this.cargando = true; // Activar indicador de carga después de un retraso
+      setTimeout(() => {
+        if (this.eventoActualizar.codigoEvento) {
+          this._eventoServices.actualizarEvento(this.evento);
+          this.cargando = false;
+          this.mensajeDeExito();
+          this.eventoActualizar = new EventoModel(new CongresoModel());
+          this.resetearFormulario();
+          
+          console.log(this.listaDeEvento);
+
+        } else {
+          if (codigoExistente) {
+            this._eventoServices.actualizarEvento(this.evento);
+            this.cargando = false;
+            this.mensajeDeExito();
+            this.resetearFormulario();
+            this.eventoActualizar = new EventoModel(new CongresoModel());
+            
+            console.log(this.listaDeEvento);
+          } else {
+            this.error = false;
+            this.cargando = false;
+            const { horas, minutos } = this.convertirHoraAMPM(this.horaEvento);
+            const fechaCompleta = this.combinarFechaYHora(this.evento.fecha, horas, minutos);
+            this.evento.fecha = fechaCompleta;
+            const { horasTolerancia, minutosTolerancia } = this.convertirHoraToleranciaAMPM(this.horaToleranciaEvento);
+            const fechaCompletaTolerancia = this.combinarFechaYHora(this.evento.fecha, horasTolerancia, minutosTolerancia)
+            this.evento.tolerancia = fechaCompletaTolerancia;
+            this._eventoServices.agregarEvento(this.evento);
+            this.mensajeDeExito();
+            console.log(this.listaDeEvento);
+            this.resetearFormulario();
+          }
+        }
+
+      }, 1000)
+
+
     }
   }
 

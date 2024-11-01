@@ -23,6 +23,7 @@ import { EventoComponent } from './components/auxiliares/evento/evento.component
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ListaCongresoComponent } from './components/auxiliares/congreso/lista-congreso/lista-congreso.component';
 import { ListaEventoComponent } from './components/auxiliares/evento/lista-evento/lista-evento.component';
+import { ListacategoriaComponent } from './components/auxiliares/categoria/listacategoria/listacategoria.component';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { ListaEventoComponent } from './components/auxiliares/evento/lista-event
     EventoComponent,
     InicioComponent,
     ListaCongresoComponent,
-    ListaEventoComponent
+    ListaEventoComponent,
+    ListacategoriaComponent,
+    
   ],
   imports: [
     BrowserModule,

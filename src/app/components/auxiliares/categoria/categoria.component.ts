@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CategoriaModel } from '../../../models/categoria.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { CategoriaService } from '../../../services/categoria.service';
@@ -15,91 +15,42 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CategoriaComponent {
 
-  listaCategoria: CategoriaModel[] = [];
+  error: boolean = false;
+  textoError: string = '';
+  listaCategoria: CategoriaModel[] = [
+    {codCategoria:'12345678',
+      descripcion : 'Categoria 1'
+    }
+  ];
   cargando: boolean = false;
+  categoria: CategoriaModel = new CategoriaModel();
+  categoriaActualizar: CategoriaModel = new CategoriaModel();
 
 
-  displayedColumns: string[] = ['acciones', 'codigo', 'descripcion'];
-  dataSource!: MatTableDataSource<any>;
-
-  formInscripcion: FormGroup;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-
-  constructor(private formBuil: FormBuilder,
-    private _categoriaService: CategoriaService,
-    private _snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) {
-    this.formInscripcion = this.formBuil.group({
-      codigo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    })
-  }
+  constructor(){
+}
 
   ngOnInit(): void {
-    this.obtenerCategoria();
   }
 
-  obtenerCategoria() {
-    this.listaCategoria = this._categoriaService.obtenerCategoria();
-    this.dataSource = new MatTableDataSource(this.listaCategoria)
+  generarCodCategoria(){
+    const tiempoObtenida = new Date().getTime().toString();
+    this.categoria.codCategoria = tiempoObtenida;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  filtroCategoriaPorCodigo(){
+    //falta el filtro
+  }
+  filtroCategoriaPorDescripcion(){
+ //falta el filtro
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
-
-
-  agregarCategoria() {
+  agregarCategoria(from: NgForm) {
     //console.log(this.formInscripcion);
 
-    if (this.formInscripcion.invalid) {
-      this._snackBar.open('Rellene los campos requeridos', '', {
-        duration: 4000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      })
-    } else {
-
-      this.cargando = true;
-      setTimeout(() => {
-        const inscripcion: CategoriaModel = {
-          codCategoria: this.formInscripcion.value.codigo,
-          descripcion: this.formInscripcion.value.descripcion,
-        }
-        this._categoriaService.agregarCategoria(inscripcion);
-        this._snackBar.open('se agrego correctamente el usuario', '', {
-          duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        })
-        this.cargando = false;
-      }, 2000);
-      
-     
-      //console.log(inscripcion);
-    }
-
+  
   }
 
-  eliminarCategoria(index: number) {
-    console.log(index);
-    this._categoriaService.eliminarCategoria(index);
-    this.obtenerCategoria();
-
-    this._snackBar.open('se elimino el registro con éxito', '', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top'
-    })
-  }
+ 
 }
 

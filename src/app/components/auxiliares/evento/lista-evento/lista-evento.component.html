@@ -1,58 +1,64 @@
+<div class="no-datos">
+  <span>¡No hay datos!</span>
+</div>
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-  
-      <!-- ID Column -->
-      <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
-        <td mat-cell *matCellDef="let row"> {{row.acciones}} </td>
-      </ng-container>
-  
-      <!-- Progress Column -->
-      <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
-        <td mat-cell *matCellDef="let row"> {{row.Codigo}}% </td>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
-      </ng-container>
-  
-      <!-- Fruit Column -->
-      <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-        <td mat-cell *matCellDef="let row"> {{row.descripcion}} </td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource" matSort>
 
-           <ng-container matColumnDef="fechaHoraevento">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha Hora de  Evento </th>
-            <td mat-cell *matCellDef="let row"> {{row.fechaHoraevento}} </td>
-          </ng-container>
-          <ng-container matColumnDef="tolerancia">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> tolerancia </th>
-            <td mat-cell *matCellDef="let row"> {{row.tolerancia}} </td>
-          </ng-container>
-          <ng-container matColumnDef="duracion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> duracion </th>
-            <td mat-cell *matCellDef="let row"> {{row.duracion}} </td>
-          </ng-container>
-          <ng-container matColumnDef="congreso">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> congreso</th>
-            <td mat-cell *matCellDef="let row"> {{row.congreso}} </td>
-          </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-      <!-- Row shown when there is no matching data. -->
-      <!-- <tr class="mat-row" *matNoDataRow>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+      <td mat-cell *matCellDef="let evento">
+        <button matTooltip="Eliminar" mat-icon-button color="warn" aria-label="delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button matTooltip="Editar" mat-icon-button style="color: var( --color-primario);" aria-label="edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.codigoEvento}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.nombre}} </td>
+    </ng-container>
+
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.descripcion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaHoraevento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha Hora de Evento </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.fecha}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tolerancia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> tolerancia </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.tolerancia}} </td>
+    </ng-container>
+    <ng-container matColumnDef="duracion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> duracion </th>
+      <td mat-cell *matCellDef="let evento"> {{evento.duracion}} </td>
+    </ng-container>
+    <ng-container matColumnDef="congreso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> congreso</th>
+      <td mat-cell *matCellDef="let evento"> {{evento.congresoIdCongreso}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <!-- <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
       </tr> -->
 
-      ojo referencia:
-      C:\Users\LENOVO\Desktop\FANY\angular\practicando\consumoAPIRUCS\src\app\components\persona\listapersona
-    </table>
-  
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-  </div>
+    <!-- ojo referencia:
+      C:\Users\LENOVO\Desktop\FANY\angular\practicando\consumoAPIRUCS\src\app\components\persona\listapersona -->
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

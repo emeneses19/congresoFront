@@ -1,0 +1,16 @@
+/* cuando no hay datos */
+.no-datos {
+    padding: 1rem; 
+    border: 1px solid #f8bb86;
+    border-radius: 5px; 
+    text-align: center; 
+    background-color: var(--color-secundario); 
+    font-weight: bold; 
+}
+
+.mat-elevation-z8 {
+    width: 750px;
+    overflow: auto; /* Enable both horizontal and vertical scrolling */
+  }
+
+  

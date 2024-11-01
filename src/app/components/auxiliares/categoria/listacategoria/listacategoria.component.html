@@ -1,0 +1,33 @@
+<div *ngIf="listaDeCategoria.length <=0" class="no-datos">
+    <span>¡No hay datos!</span>
+</div>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Código</th>
+            <th scope="col">Descripción</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoria of listaDeCategoria">
+            <td>
+                <button (click)="eliminarCategoria(categoria)" matTooltip="Eliminar" mat-icon-button
+                    color="warn" aria-label="delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="categoriaActualizar(categoria)" matTooltip="Editar" mat-icon-button
+                    style="color: var( --color-primario);" aria-label="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>{{categoria.codCategoria}}</td>
+            <td> {{categoria.descripcion}}</td>
+            
+        </tr>
+
+    </tbody>
+
+</table>

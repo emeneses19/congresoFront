@@ -1,71 +1,59 @@
-<div class="agregar-categoria">
-    <div class="cabezera-categoria">
-        <h2 mat-dialog-title>Agregar Estado Inscripcion</h2>
+<div class="formulario-categoria">
+    <div class="cabecera-formulario">
+        <h2 mat-dialog-title>Categoria</h2>
         <mat-dialog-actions>
             <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
         </mat-dialog-actions>
     </div>
-    <div class="formulario-categoria">
+    <div class="formulario-agregar-categoria">
         <mat-dialog-content>
-            <form [formGroup]="formInscripcion" (ngSubmit)="agregarCategoria()">
-
+            @if (error) {
+            <div class="mensaje-error">
+                <span>{{textoError}}</span>
+            </div>
+            }
+            <form class="form" #formulario="ngForm" *ngIf="!cargando">
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" formControlName="codigo">
+                    <input (input)="filtroCategoriaPorCodigo()" [(ngModel)]="categoria.codCategoria"
+                        name="codigoCategoria" matInput required="required" #codigoCategoria="ngModel">
+                        
+                        <mat-error *ngIf="codigoCategoria.invalid && (codigoCategoria.dirty || codigoCategoria.touched)">
+                        <ng-container>Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                    </mat-error>
+                    <span class="material-icons btn-generadrCodigo" (click)="generarCodCategoria()">
+                        edit
+                    </span>
                 </mat-form-field>
-
                 <mat-form-field appearance="outline">
-                    <mat-label>Descripción</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" formControlName="descripcion">
-                </mat-form-field>
-
+                    <mat-label>Descripcion</mat-label>
+                    <input (input)="filtroCategoriaPorDescripcion()" class="campo-no-valido" [(ngModel)]="categoria.descripcion"
+                        name="descripcion" matInput required minlength="4" #descripcion="ngModel">
+                    <mat-error *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                        <ng-container *ngIf="descripcion.errors?.['required']">Campo es
+                            <strong>obligatorio</strong>
+                        </ng-container>
+                        <ng-container *ngIf="descripcion.errors?.['minlength']">
+                            El nombre debe tener <strong>al menos 5 caracteres</strong>
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field> 
+                
+  
                 <mat-dialog-actions align="end">
-                    <button class="btn-guardar" type="submit" mat-button>Guardar</button>
+                    <button class="btn-guardar" type="submit" mat-button (click)="agregarCategoria(formulario)">Guardar</button>
                 </mat-dialog-actions>
-
             </form>
         </mat-dialog-content>
-        <div class="cargando" *ngIf="cargando">
-            <img src="../../../../assets/img/cargando2.gif" alt="">
-        </div>
     </div>
-
-    <div class="lista-categoria">
-        <div class="mat-elevation-z1" *ngIf="listaCategoria.length>0">
-            <table mat-table [dataSource]="dataSource" matSort>
-
-                <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
-                    <td mat-cell *matCellDef="let inscripcion; let i = index">
-                        <button (click)="eliminarCategoria(i)" matTooltip="Eliminar" mat-icon-button color="warn"
-                            aria-label="delete">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                        <button matTooltip="Editar" mat-icon-button style="color: var( --color-primario);"
-                            aria-label="edit">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="codigo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CÓDIGO </th>
-                    <td mat-cell *matCellDef="let inscripcion">{{inscripcion.codigo}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="descripcion">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPCIÓN </th>
-                    <td mat-cell *matCellDef="let inscripcion"> {{inscripcion.descripcion}} </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-            </table>
-
-        </div>
-        <div class="no-datos" *ngIf="listaCategoria.length == 0">NO HAY REGISTROS</div>
+    <div *ngIf="cargando" class="congreso__block_cargando">
+        <img src="../../../../assets/img/cargando2.gif" alt="cargando">
+        <span>Cargando</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="categoria__block_lista">
+        <app-listacategoria></app-listacategoria>
     </div>
 </div>
