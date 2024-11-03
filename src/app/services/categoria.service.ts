@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CategoriaModel } from '../models/categoria.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +8,53 @@ import { CategoriaModel } from '../models/categoria.model';
 export class CategoriaService {
 
   listaCategoria: CategoriaModel[] = [
-    { codCategoria: '111', descripcion: '1ALUMNO' },
-    { codCategoria: '', descripcion: '2docente' },
-    { codCategoria: '', descripcion: '3docente' },
-    { codCategoria: '', descripcion: '6docente' },
-    { codCategoria: '', descripcion: '4docente' },
-    { codCategoria: '', descripcion: '3docente' },
-    { codCategoria: '', descripcion: '2docente' },
+    { codCategoria: '0001', descripcion: 'Categoria 21' }
   ];
 
   constructor() { }
 
-  obtenerCategoria(){
-    return this.listaCategoria.slice();
+  filtroCategoriaDescripcion(descripcionIngresado: string): Observable<CategoriaModel[]>{
+    const descripcionIngresadoMinusculas = descripcionIngresado.toLocaleLowerCase();
+    const listaFiltrada = this.listaCategoria.filter(categoria=>categoria.descripcion.toLowerCase().includes(descripcionIngresadoMinusculas));
+    if(listaFiltrada.length > 0){
+      return of(listaFiltrada);
+    }else{
+      return of([]);
+    }
+
   }
 
-  eliminarCategoria(id: number){
-    this.listaCategoria.splice(id,1);
+filtroCategoriaCodigo(codigoIngresado: string): Observable<CategoriaModel[]>{
+  const listaFiltrada = this.listaCategoria.filter(categoria => categoria.codCategoria.includes(codigoIngresado));
+  if(listaFiltrada.length > 0){
+    return of(listaFiltrada);
+  }else{
+    return of([]);
+  }
+  
+
+}
+  obtenerCategoria(): Observable<CategoriaModel[]>{
+    return of(this.listaCategoria); 
+  }
+
+  actualizarCategoria(categoriaActualizado: CategoriaModel){
+    const index= this.listaCategoria.findIndex(item => item.codCategoria === categoriaActualizado.codCategoria);
+    if(index !== -1){
+      this.listaCategoria[index] = categoriaActualizado;
+    }
+
+  }
+
+  eliminarCategoria(categoria: CategoriaModel){
+    const index = this.listaCategoria.findIndex(item => item === categoria)
+    if(index !== -1){
+      this.listaCategoria.splice(index,1);
+    }
   }
 
   agregarCategoria(categoria: CategoriaModel){
     this.listaCategoria.push(categoria);
   }
+
 }

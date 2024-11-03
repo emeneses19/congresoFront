@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, input, Output } from '@angular/core';
 import { CategoriaModel } from '../../../../models/categoria.model';
 
 @Component({
@@ -7,13 +7,13 @@ import { CategoriaModel } from '../../../../models/categoria.model';
   styleUrl: './listacategoria.component.css'
 })
 export class ListacategoriaComponent {
-  listaDeCategoria:CategoriaModel[] =[]; 
+  @Input() listaDeCategoria: CategoriaModel[] = [];
+  @Output() categoriaEliminar = new EventEmitter()
+  @Output() categoriaEditar = new EventEmitter();
 
-  eliminarCategoria(categoria: CategoriaModel){
-//falta impem
+  eliminarCategoria(categoria: CategoriaModel) {
+    this.categoriaEliminar.emit(categoria);
   }
-  categoriaActualizar(categoria: CategoriaModel){
-    //falta impem
-      }
+
 
 }

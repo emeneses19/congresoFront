@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { CategoriaService } from '../../../services/categoria.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria',
@@ -18,39 +19,109 @@ export class CategoriaComponent {
   error: boolean = false;
   textoError: string = '';
   listaCategoria: CategoriaModel[] = [
-    {codCategoria:'12345678',
-      descripcion : 'Categoria 1'
-    }
   ];
   cargando: boolean = false;
   categoria: CategoriaModel = new CategoriaModel();
   categoriaActualizar: CategoriaModel = new CategoriaModel();
 
+  constructor(private _categoriaServices: CategoriaService) {
 
-  constructor(){
-}
-
-  ngOnInit(): void {
   }
 
-  generarCodCategoria(){
+  ngOnInit(): void {
+    this.obtenerCategorias();
+  }
+
+  recibiendoCategoria(categoria: CategoriaModel) {
+    this.categoriaActualizar = JSON.parse(JSON.stringify(categoria));
+    this.categoria = this.categoriaActualizar;
+  }
+
+  generarCodCategoria() {
     const tiempoObtenida = new Date().getTime().toString();
     this.categoria.codCategoria = tiempoObtenida;
   }
-
-  filtroCategoriaPorCodigo(){
-    //falta el filtro
-  }
-  filtroCategoriaPorDescripcion(){
- //falta el filtro
+  eliminarCategoria(categoria: CategoriaModel) {
+    this._categoriaServices.eliminarCategoria(categoria);
   }
 
-  agregarCategoria(from: NgForm) {
-    //console.log(this.formInscripcion);
-
-  
+  filtroCategoriaPorCodigo() {
+    this.cargando = true;
+    this._categoriaServices.filtroCategoriaCodigo(this.categoria.codCategoria).subscribe(result => {
+      this.listaCategoria = result;
+      this.cargando = false;
+    });
+  }
+  filtroCategoriaPorDescripcion() {
+    this.cargando = true;
+    this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
+      this.listaCategoria = result;
+      this.cargando = false;
+    })
+  }
+  formatearFormulario() {
+    this.categoria = new CategoriaModel();
+  }
+  mensajeDeExito() {
+    Swal.fire({
+      text: `El registro se ha guardado exitosamente.`,
+      icon: 'success',
+      width: 400,
+      confirmButtonColor: "#1772b8",
+    });
   }
 
- 
+
+  agregarCategoria(form: NgForm) {
+    if (form.invalid) {
+      this.error = true;
+      this.textoError = 'Formulario incorrecto. Por favor, revíselo.';
+    } else {
+      const codigoExistenteCategoria = this.listaCategoria.find(categoria => categoria.codCategoria === this.categoria.codCategoria);
+      this.cargando = true;
+      setTimeout(() => {
+        if (this.categoriaActualizar.codCategoria) {
+          this._categoriaServices.actualizarCategoria(this.categoria);
+          this.mensajeDeExito();
+          this.cargando = false;
+          this.obtenerCategorias();
+          this.categoriaActualizar = new CategoriaModel();
+          this.formatearFormulario()
+          console.log(this.listaCategoria);
+        } else {
+          if (codigoExistenteCategoria) {
+            this._categoriaServices.actualizarCategoria(this.categoria);
+            this.cargando = false;
+            this.mensajeDeExito();
+            this.formatearFormulario();
+            this.obtenerCategorias();
+            this.categoriaActualizar = new CategoriaModel();
+            console.log(this.listaCategoria);
+          } else {
+            this.cargando = false;
+            this._categoriaServices.agregarCategoria(this.categoria);
+            this.error = false;
+            this.textoError = '';
+            console.log(this.listaCategoria);
+            this.mensajeDeExito();
+            this.formatearFormulario();
+          }
+        }
+      }, 100);
+
+
+    }
+
+
+  }
+  obtenerCategorias() {
+    this.cargando = true;
+    this._categoriaServices.obtenerCategoria().subscribe(categorias => {
+      this.listaCategoria = categorias;
+      this.cargando = false;
+    })
+  }
+
+
 }
 
