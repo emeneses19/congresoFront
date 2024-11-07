@@ -29,9 +29,8 @@ filtroCategoriaCodigo(codigoIngresado: string): Observable<CategoriaModel[]>{
   if(listaFiltrada.length > 0){
     return of(listaFiltrada);
   }else{
-    return of([]);
-  }
-  
+    return of(listaFiltrada);
+  }  
 
 }
   obtenerCategoria(): Observable<CategoriaModel[]>{
@@ -54,6 +53,10 @@ filtroCategoriaCodigo(codigoIngresado: string): Observable<CategoriaModel[]>{
   }
 
   agregarCategoria(categoria: CategoriaModel){
+    const index = this.listaCategoria.findIndex(item => item.codCategoria === categoria.codCategoria);
+    if(index !== -1){
+      this.listaCategoria[index] = categoria;
+    }
     this.listaCategoria.push(categoria);
   }
 

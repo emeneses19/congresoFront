@@ -54,7 +54,8 @@
     </div>
     <mat-divider></mat-divider>
     <div class="categoria__block_lista">
-        <app-listacategoria  [listaDeCategoria]="listaCategoria"
+        <app-listacategoria  [listaDeCategoria]=" listaCategoriaFiltrada"
+                            [sinResultadosFiltro]="sinResultadosFiltro"
                             (categoriaEditar)="recibiendoCategoria($event)"
                             (categoriaEliminar)="eliminarCategoria($event)"
          ></app-listacategoria>

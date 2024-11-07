@@ -8,6 +8,7 @@ import { CategoriaModel } from '../../../../models/categoria.model';
 })
 export class ListacategoriaComponent {
   @Input() listaDeCategoria: CategoriaModel[] = [];
+  @Input() sinResultadosFiltro: Boolean = false;
   @Output() categoriaEliminar = new EventEmitter()
   @Output() categoriaEditar = new EventEmitter();
 

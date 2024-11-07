@@ -20,9 +20,11 @@ export class CategoriaComponent {
   textoError: string = '';
   listaCategoria: CategoriaModel[] = [
   ];
+  listaCategoriaFiltrada: CategoriaModel[] = [];
   cargando: boolean = false;
   categoria: CategoriaModel = new CategoriaModel();
   categoriaActualizar: CategoriaModel = new CategoriaModel();
+  sinResultadosFiltro: boolean = false;
 
   constructor(private _categoriaServices: CategoriaService) {
 
@@ -46,18 +48,35 @@ export class CategoriaComponent {
   }
 
   filtroCategoriaPorCodigo() {
-    this.cargando = true;
-    this._categoriaServices.filtroCategoriaCodigo(this.categoria.codCategoria).subscribe(result => {
-      this.listaCategoria = result;
-      this.cargando = false;
-    });
+    const codigoIngresado =  this.categoria.codCategoria.trim();
+    if(codigoIngresado){
+      this.cargando = true;
+      this._categoriaServices.filtroCategoriaCodigo(this.categoria.codCategoria).subscribe(result => {
+        this.listaCategoriaFiltrada = result;
+        this.sinResultadosFiltro = result.length === 0;
+        this.cargando = false;
+      });
+    }else{
+      this.listaCategoriaFiltrada = this.listaCategoria;
+      this.sinResultadosFiltro = false;
+    }
+
+   
   }
   filtroCategoriaPorDescripcion() {
-    this.cargando = true;
-    this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
-      this.listaCategoria = result;
-      this.cargando = false;
-    })
+    const descripcionIngresado = this.categoria.descripcion.trim();
+    if(descripcionIngresado){
+      this.cargando = true;
+      this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
+        this.listaCategoriaFiltrada = result;
+        this.sinResultadosFiltro = result.length ===0;
+        this.cargando = false;
+      })
+    }else{
+      this.listaCategoriaFiltrada = this.listaCategoria;
+      this.sinResultadosFiltro = false;
+    }
+ 
   }
   formatearFormulario() {
     this.categoria = new CategoriaModel();
@@ -70,7 +89,7 @@ export class CategoriaComponent {
       confirmButtonColor: "#1772b8",
     });
   }
-
+  
 
   agregarCategoria(form: NgForm) {
     if (form.invalid) {
@@ -100,6 +119,7 @@ export class CategoriaComponent {
           } else {
             this.cargando = false;
             this._categoriaServices.agregarCategoria(this.categoria);
+            this.obtenerCategorias();
             this.error = false;
             this.textoError = '';
             console.log(this.listaCategoria);
@@ -108,7 +128,6 @@ export class CategoriaComponent {
           }
         }
       }, 100);
-
 
     }
 
