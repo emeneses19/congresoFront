@@ -9,8 +9,8 @@
             
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let categoria of listaDeCategoria">
+    <tbody *ngIf="categoriasFiltradas && categoriasFiltradas.length > 0; else noResultados">
+        <tr *ngFor="let categoria of categoriasFiltradas">
             <td>
                 <button (click)="eliminarCategoria(categoria)" matTooltip="Eliminar" mat-icon-button
                     color="warn" aria-label="delete">
@@ -29,6 +29,9 @@
     </tbody>
     
 </table>
-<div *ngIf="sinResultadosFiltro" class="no-datos">
-    <span>¡No hay datos!</span>
-</div>
+<ng-template #noResultados>
+    <div  class="no-datos">
+        <span>¡No hay datos!</span>
+    </div>
+  </ng-template>
+  

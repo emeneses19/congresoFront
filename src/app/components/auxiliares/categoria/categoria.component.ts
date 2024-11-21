@@ -47,37 +47,22 @@ export class CategoriaComponent {
     this._categoriaServices.eliminarCategoria(categoria);
   }
 
-  filtroCategoriaPorCodigo() {
-    const codigoIngresado =  this.categoria.codCategoria.trim();
-    if(codigoIngresado){
-      this.cargando = true;
-      this._categoriaServices.filtroCategoriaCodigo(this.categoria.codCategoria).subscribe(result => {
-        this.listaCategoriaFiltrada = result;
-        this.sinResultadosFiltro = result.length === 0;
-        this.cargando = false;
-      });
-    }else{
-      this.listaCategoriaFiltrada = this.listaCategoria;
-      this.sinResultadosFiltro = false;
-    }
 
-   
-  }
-  filtroCategoriaPorDescripcion() {
-    const descripcionIngresado = this.categoria.descripcion.trim();
-    if(descripcionIngresado){
-      this.cargando = true;
-      this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
-        this.listaCategoriaFiltrada = result;
-        this.sinResultadosFiltro = result.length ===0;
-        this.cargando = false;
-      })
-    }else{
-      this.listaCategoriaFiltrada = this.listaCategoria;
-      this.sinResultadosFiltro = false;
-    }
+  // filtroCategoriaPorDescripcion() {
+  //   const descripcionIngresado = this.categoria.descripcion.trim();
+  //   if(descripcionIngresado){
+  //     this.cargando = true;
+  //     this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
+  //       this.listaCategoriaFiltrada = result;
+  //       this.sinResultadosFiltro = result.length ===0;
+  //       this.cargando = false;
+  //     })
+  //   }else{
+  //     this.listaCategoriaFiltrada = this.listaCategoria;
+  //     this.sinResultadosFiltro = false;
+  //   }
  
-  }
+  // }
   formatearFormulario() {
     this.categoria = new CategoriaModel();
   }

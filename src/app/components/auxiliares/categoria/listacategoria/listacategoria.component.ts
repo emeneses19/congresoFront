@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CategoriaModel } from '../../../../models/categoria.model';
 
 @Component({
@@ -6,15 +6,37 @@ import { CategoriaModel } from '../../../../models/categoria.model';
   templateUrl: './listacategoria.component.html',
   styleUrl: './listacategoria.component.css'
 })
-export class ListacategoriaComponent {
+export class ListacategoriaComponent implements OnChanges {
   @Input() listaDeCategoria: CategoriaModel[] = [];
-  @Input() sinResultadosFiltro: Boolean = false;
+  categoriasFiltradas: CategoriaModel[] = [];
+  @Input() filtroPorCodigo: string = '';
+  @Input() filtroPorDescripcion: string = '';
   @Output() categoriaEliminar = new EventEmitter()
   @Output() categoriaEditar = new EventEmitter();
+  sinRegistros:boolean = false;
 
   eliminarCategoria(categoria: CategoriaModel) {
     this.categoriaEliminar.emit(categoria);
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['listaDeCategoria'] || changes['filtroPorCodigo'] || changes['filtroPorDescripcion']){
+      this.aplicarFiltros();
+    }
+  }
+  aplicarFiltros() {
+    const codigo = this.filtroPorCodigo?.trim().toLowerCase();
+    const descripcion = this.filtroPorDescripcion?.trim().toLowerCase();
 
-
+    if (!codigo && !descripcion) {
+      // Si ambos inputs están en blanco, mostrar toda la lista
+      this.categoriasFiltradas = [...this.listaDeCategoria];
+    } else {
+      // Filtrar por código o descripción según los inputs
+      this.categoriasFiltradas = this.listaDeCategoria.filter(categoria => {
+        const coincideCodigo = codigo ? categoria.codCategoria.toLowerCase().includes(codigo) : true;
+        const coincideDescripcion = descripcion ? categoria.descripcion.toLowerCase().includes(descripcion) : true;
+        return coincideCodigo && coincideDescripcion;
+      });
+    }
+  }
 }

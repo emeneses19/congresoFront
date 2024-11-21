@@ -15,7 +15,7 @@
             <form class="form" #formulario="ngForm" *ngIf="!cargando">
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
-                    <input (input)="filtroCategoriaPorCodigo()" [(ngModel)]="categoria.codCategoria"
+                    <input  [(ngModel)]="categoria.codCategoria"
                         name="codigoCategoria" matInput required="required" #codigoCategoria="ngModel">
                         
                         <mat-error *ngIf="codigoCategoria.invalid && (codigoCategoria.dirty || codigoCategoria.touched)">
@@ -29,7 +29,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Descripcion</mat-label>
-                    <input (input)="filtroCategoriaPorDescripcion()" class="campo-no-valido" [(ngModel)]="categoria.descripcion"
+                    <input class="campo-no-valido" [(ngModel)]="categoria.descripcion"
                         name="descripcion" matInput required minlength="4" #descripcion="ngModel">
                     <mat-error *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
                         <ng-container *ngIf="descripcion.errors?.['required']">Campo es
@@ -54,8 +54,9 @@
     </div>
     <mat-divider></mat-divider>
     <div class="categoria__block_lista">
-        <app-listacategoria  [listaDeCategoria]=" listaCategoriaFiltrada"
-                            [sinResultadosFiltro]="sinResultadosFiltro"
+        <app-listacategoria  [listaDeCategoria]="listaCategoria"
+                            [filtroPorCodigo]="categoria.codCategoria"
+                            [filtroPorDescripcion]="categoria.descripcion"
                             (categoriaEditar)="recibiendoCategoria($event)"
                             (categoriaEliminar)="eliminarCategoria($event)"
          ></app-listacategoria>
