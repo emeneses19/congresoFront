@@ -13,26 +13,7 @@ export class CategoriaService {
 
   constructor() { }
 
-  filtroCategoriaDescripcion(descripcionIngresado: string): Observable<CategoriaModel[]>{
-    const descripcionIngresadoMinusculas = descripcionIngresado.toLocaleLowerCase();
-    const listaFiltrada = this.listaCategoria.filter(categoria=>categoria.descripcion.toLowerCase().includes(descripcionIngresadoMinusculas));
-    if(listaFiltrada.length > 0){
-      return of(listaFiltrada);
-    }else{
-      return of([]);
-    }
-
-  }
-
-filtroCategoriaCodigo(codigoIngresado: string): Observable<CategoriaModel[]>{
-  const listaFiltrada = this.listaCategoria.filter(categoria => categoria.codCategoria.includes(codigoIngresado));
-  if(listaFiltrada.length > 0){
-    return of(listaFiltrada);
-  }else{
-    return of(listaFiltrada);
-  }  
-
-}
+  
   obtenerCategoria(): Observable<CategoriaModel[]>{
     return of(this.listaCategoria); 
   }

@@ -11,7 +11,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuxiliaresComponent } from './components/auxiliares/auxiliares.component';
 import { CategoriaComponent } from './components/auxiliares/categoria/categoria.component';
-import { EstadoInscripcionComponent } from './components/auxiliares/estado-inscripcion/estado-inscripcion.component';
 import { CongresoComponent } from './components/auxiliares/congreso/congreso.component';
 //angular Material
 import { MaterialModule } from './shared/modules/material.module';
@@ -24,6 +23,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ListaCongresoComponent } from './components/auxiliares/congreso/lista-congreso/lista-congreso.component';
 import { ListaEventoComponent } from './components/auxiliares/evento/lista-evento/lista-evento.component';
 import { ListacategoriaComponent } from './components/auxiliares/categoria/listacategoria/listacategoria.component';
+import { EstadoinscripcionComponent } from './components/estadoinscripcion/estadoinscripcion.component';
+import { EstadodeinscripcionComponent } from './components/auxiliares/estadodeinscripcion/estadodeinscripcion.component';
+import { ListadeestadoinscripcionComponent } from './components/auxiliares/estadodeinscripcion/listadeestadoinscripcion/listadeestadoinscripcion.component';
 
 
 @NgModule({
@@ -31,7 +33,6 @@ import { ListacategoriaComponent } from './components/auxiliares/categoria/lista
     AppComponent,
     AuxiliaresComponent,
     CategoriaComponent,
-    EstadoInscripcionComponent,
     CongresoComponent,
     InstitucionProcedenciaComponent,
     ListaComponent,
@@ -42,6 +43,9 @@ import { ListacategoriaComponent } from './components/auxiliares/categoria/lista
     ListaCongresoComponent,
     ListaEventoComponent,
     ListacategoriaComponent,
+    EstadoinscripcionComponent,
+    EstadodeinscripcionComponent,
+    ListadeestadoinscripcionComponent,
     
   ],
   imports: [

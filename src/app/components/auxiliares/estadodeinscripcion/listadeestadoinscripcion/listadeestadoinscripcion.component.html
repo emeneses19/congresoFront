@@ -1,0 +1,38 @@
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Acciones</th>
+            <th scope="col">Código</th>
+            <th scope="col">Descripción</th>
+            
+        </tr>
+    </thead>
+    <tbody *ngIf="estadodeInscripcionFiltradas && estadodeInscripcionFiltradas.length > 0; else noResultados">
+        <tr *ngFor="let estadoInscripcion of estadodeInscripcionFiltradas">
+            <td>
+                <button (click)="eliminarEstadoInscripcion(estadoInscripcion)" matTooltip="Eliminar" mat-icon-button
+                    color="warn" aria-label="delete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="estadoInscripcionEditar.emit(estadoInscripcion)" matTooltip="Editar" mat-icon-button
+                    style="color: var( --color-primario);" aria-label="edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+            <td>{{estadoInscripcion.codInscripcion}}</td>
+            <td> {{estadoInscripcion.descripcion}}</td>
+            
+        </tr>
+
+    </tbody>
+    
+</table>
+<ng-template #noResultados>
+    <div  class="no-datos">
+        <span>¡No hay datos!</span>
+    </div>
+  </ng-template>
+
+  

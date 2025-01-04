@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CategoriaModel } from '../../../../models/categoria.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listacategoria',
@@ -16,7 +17,21 @@ export class ListacategoriaComponent implements OnChanges {
   sinRegistros:boolean = false;
 
   eliminarCategoria(categoria: CategoriaModel) {
-    this.categoriaEliminar.emit(categoria);
+    Swal.fire({
+      title: 'Aviso',
+      text: `Esta seguro de eliminar el registro? `,
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: "#1772b8",
+      width: 400,
+    }).then(resp => {
+      if (resp.value) {
+        this.categoriaEliminar.emit(categoria);
+        this.aplicarFiltros();
+      }
+    });
+    
+    
   }
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['listaDeCategoria'] || changes['filtroPorCodigo'] || changes['filtroPorDescripcion']){

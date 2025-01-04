@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { InstitucionProcedenciaComponent } from './institucion-procedencia/institucion-procedencia.component';
-import { EstadoInscripcionComponent } from './estado-inscripcion/estado-inscripcion.component';
 import { MatCard } from '@angular/material/card';
 import { LugarProcedenciaComponent } from './lugar-procedencia/lugar-procedencia.component';
 import { EventoComponent } from './evento/evento.component';
 import { CongresoComponent } from './congreso/congreso.component';
+import { EstadodeinscripcionComponent } from './estadodeinscripcion/estadodeinscripcion.component';
 
 @Component({
   selector: 'app-auxiliares',
@@ -24,7 +24,7 @@ export class AuxiliaresComponent {
   }
 
   openEstadoInscripcion(){
-    this.dialog.open(EstadoInscripcionComponent);
+    this.dialog.open(EstadodeinscripcionComponent);
   }
   openLugarDeProcedencia(){
     this.dialog.open(LugarProcedenciaComponent);

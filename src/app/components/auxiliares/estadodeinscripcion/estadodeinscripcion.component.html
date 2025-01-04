@@ -1,11 +1,11 @@
-<div class="formulario-categoria">
+<div class="formulario-estadoInscripcion">
     <div class="cabecera-formulario">
-        <h2 mat-dialog-title>Categoria</h2>
+        <h2 mat-dialog-title>Estado de Inscripción</h2>
         <mat-dialog-actions>
             <mat-icon mat-button mat-dialog-close aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
         </mat-dialog-actions>
     </div>
-    <div class="formulario-agregar-categoria">
+    <div class="formulario-agregar-estadIncripcion">
         <mat-dialog-content>
             @if (error) {
             <div class="mensaje-error">
@@ -15,10 +15,9 @@
             <form class="form" #formulario="ngForm" *ngIf="!cargando">
                 <mat-form-field appearance="outline">
                     <mat-label>Código</mat-label>
-                    <input  [(ngModel)]="categoria.codCategoria"
-                        name="codigoCategoria" matInput required="required" #codigoCategoria="ngModel" autocomplete="off">
-                        
-                        <mat-error *ngIf="codigoCategoria.invalid && (codigoCategoria.dirty || codigoCategoria.touched)">
+                    <input  [(ngModel)]="estadoDeInscripcion.codInscripcion"
+                        name="codInscripcion" matInput required="required" #codigoEstadoInscripcion="ngModel" autocomplete="off">                
+                        <mat-error *ngIf="codigoEstadoInscripcion.invalid && (codigoEstadoInscripcion.dirty || codigoEstadoInscripcion.touched)">
                         <ng-container>Campo es
                             <strong>obligatorio</strong>
                         </ng-container>
@@ -29,8 +28,8 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Descripcion</mat-label>
-                    <input class="campo-no-valido" [(ngModel)]="categoria.descripcion" autocomplete="off"
-                        name="descripcion" matInput required minlength="4" #descripcion="ngModel">
+                    <input class="campo-no-valido" [(ngModel)]="estadoDeInscripcion.descripcion"
+                        name="descripcion" matInput required minlength="4" #descripcion="ngModel" autocomplete="off">
                     <mat-error *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
                         <ng-container *ngIf="descripcion.errors?.['required']">Campo es
                             <strong>obligatorio</strong>
@@ -43,22 +42,23 @@
                 
   
                 <mat-dialog-actions align="end">
-                    <button class="btn-guardar" type="button" mat-button (click)="agregarCategoria(formulario)">Guardar</button>
+                    <button class="btn-guardar" type="button" mat-button (click)="agregarEstadoInscripcion(formulario)">Guardar</button>
                 </mat-dialog-actions>
             </form>
         </mat-dialog-content>
     </div>
-    <div *ngIf="cargando" class="congreso__block_cargando">
+    <div *ngIf="cargando" class="estadoInscripcion__block_cargando">
         <img src="../../../../assets/img/cargando2.gif" alt="cargando">
         <span>Cargando</span>
     </div>
     <mat-divider></mat-divider>
-    <div class="categoria__block_lista">
-        <app-listacategoria  [listaDeCategoria]="listaCategoria"
-                            [filtroPorCodigo]="categoria.codCategoria"
-                            [filtroPorDescripcion]="categoria.descripcion"
-                            (categoriaEditar)="recibiendoCategoria($event)"
-                            (categoriaEliminar)="eliminarCategoria($event)"
-         ></app-listacategoria>
+    <div class="estadoIncripcion__block_lista">
+        <app-listadeestadoinscripcion 
+                                    (estadoInscripcionEditar)="recibiendoEstadoInscripcion($event)"
+                                    (estadoInscripcionEliminar)="eliminarestadoInscripcion($event)"
+                                    [filtroPorCodigo]="estadoDeInscripcion.codInscripcion"
+                                    [filtroPorDescripcion]="estadoDeInscripcion.descripcion"
+                                    [listaEstadoInscripcion]="listaEstadoDeInscripcion" >
+        </app-listadeestadoinscripcion>
     </div>
 </div>

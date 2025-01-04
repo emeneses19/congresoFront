@@ -20,11 +20,9 @@ export class CategoriaComponent {
   textoError: string = '';
   listaCategoria: CategoriaModel[] = [
   ];
-  listaCategoriaFiltrada: CategoriaModel[] = [];
   cargando: boolean = false;
   categoria: CategoriaModel = new CategoriaModel();
   categoriaActualizar: CategoriaModel = new CategoriaModel();
-  sinResultadosFiltro: boolean = false;
 
   constructor(private _categoriaServices: CategoriaService) {
 
@@ -43,26 +41,13 @@ export class CategoriaComponent {
     const tiempoObtenida = new Date().getTime().toString();
     this.categoria.codCategoria = tiempoObtenida;
   }
-  eliminarCategoria(categoria: CategoriaModel) {
-    this._categoriaServices.eliminarCategoria(categoria);
+  eliminarCategoria(categoria: CategoriaModel) {   
+        this._categoriaServices.eliminarCategoria(categoria);
+     
+
   }
 
 
-  // filtroCategoriaPorDescripcion() {
-  //   const descripcionIngresado = this.categoria.descripcion.trim();
-  //   if(descripcionIngresado){
-  //     this.cargando = true;
-  //     this._categoriaServices.filtroCategoriaDescripcion(this.categoria.descripcion).subscribe(result => {
-  //       this.listaCategoriaFiltrada = result;
-  //       this.sinResultadosFiltro = result.length ===0;
-  //       this.cargando = false;
-  //     })
-  //   }else{
-  //     this.listaCategoriaFiltrada = this.listaCategoria;
-  //     this.sinResultadosFiltro = false;
-  //   }
- 
-  // }
   formatearFormulario() {
     this.categoria = new CategoriaModel();
   }
@@ -74,7 +59,7 @@ export class CategoriaComponent {
       confirmButtonColor: "#1772b8",
     });
   }
-  
+
 
   agregarCategoria(form: NgForm) {
     if (form.invalid) {
@@ -90,8 +75,7 @@ export class CategoriaComponent {
           this.cargando = false;
           this.obtenerCategorias();
           this.categoriaActualizar = new CategoriaModel();
-          this.formatearFormulario()
-          console.log(this.listaCategoria);
+          this.formatearFormulario();
         } else {
           if (codigoExistenteCategoria) {
             this._categoriaServices.actualizarCategoria(this.categoria);
@@ -100,14 +84,12 @@ export class CategoriaComponent {
             this.formatearFormulario();
             this.obtenerCategorias();
             this.categoriaActualizar = new CategoriaModel();
-            console.log(this.listaCategoria);
           } else {
             this.cargando = false;
             this._categoriaServices.agregarCategoria(this.categoria);
             this.obtenerCategorias();
             this.error = false;
             this.textoError = '';
-            console.log(this.listaCategoria);
             this.mensajeDeExito();
             this.formatearFormulario();
           }

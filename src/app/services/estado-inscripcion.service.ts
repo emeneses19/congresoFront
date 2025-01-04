@@ -1,32 +1,43 @@
 import { Injectable } from '@angular/core';
 import { EstadoInscripcionModel } from '../models/estado-inscripcion.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstadoInscripcionService {
 
-  listaInscripcion: EstadoInscripcionModel[] = [
-    { codInscripcion: '111', descripcion: '1ALUMNO' },
-    { codInscripcion: '', descripcion: '2docente' },
-    { codInscripcion: '', descripcion: '3docente' },
-    { codInscripcion: '', descripcion: '6docente' },
-    { codInscripcion: '', descripcion: '4docente' },
-    { codInscripcion: '', descripcion: '3docente' },
-    { codInscripcion: '', descripcion: '2docente' },
+  listaEstadoInscripcion: EstadoInscripcionModel[] = [
+    { codInscripcion: '111', descripcion: 'Estado de Inscripcion 1' }
   ];
 
   constructor() { }
 
-  obtenerInscripcion(){
-    return this.listaInscripcion.slice();
+  obtenerEstadoInscripcion(): Observable<EstadoInscripcionModel[]> {
+    return of(this.listaEstadoInscripcion);
   }
 
-  eliminarInscripcion(id: number){
-    this.listaInscripcion.splice(id,1);
+  eliminarEstaInscripcion(estadoInscripcion: EstadoInscripcionModel){
+    const index = this.listaEstadoInscripcion.findIndex(estadoInc => {
+      return estadoInc === estadoInscripcion;
+    });
+    
+    if(index!==-1){
+      this.listaEstadoInscripcion.splice(index,1);
+
+    }
   }
 
-  agregarInscripcion(inscripcion: EstadoInscripcionModel){
-    this.listaInscripcion.push(inscripcion);
+  actualizarEstaInscripcion(estadoInscripcionAct: EstadoInscripcionModel) {
+    const index = this.listaEstadoInscripcion.findIndex(estadoIns => 
+      estadoIns.codInscripcion === estadoInscripcionAct.codInscripcion);
+    if (index !== -1) {
+      this.listaEstadoInscripcion[index] = estadoInscripcionAct;
+    }
+  }
+
+
+  agregarInscripcion(estadoInscripcion: EstadoInscripcionModel) {
+    this.listaEstadoInscripcion.push(estadoInscripcion);
   }
 }
