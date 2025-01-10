@@ -26,6 +26,8 @@ import { ListacategoriaComponent } from './components/auxiliares/categoria/lista
 import { EstadoinscripcionComponent } from './components/estadoinscripcion/estadoinscripcion.component';
 import { EstadodeinscripcionComponent } from './components/auxiliares/estadodeinscripcion/estadodeinscripcion.component';
 import { ListadeestadoinscripcionComponent } from './components/auxiliares/estadodeinscripcion/listadeestadoinscripcion/listadeestadoinscripcion.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { AppcongresoComponent } from './shared/appcongreso/appcongreso.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { ListadeestadoinscripcionComponent } from './components/auxiliares/estad
     EstadoinscripcionComponent,
     EstadodeinscripcionComponent,
     ListadeestadoinscripcionComponent,
+    HeaderComponent,
+    AppcongresoComponent,
     
   ],
   imports: [
