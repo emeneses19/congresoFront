@@ -20,6 +20,10 @@ import { MatSelectModule } from '@angular/material/select';
 import {
     MatSlideToggleModule
   } from '@angular/material/slide-toggle';
+  import {MatToolbarModule} from '@angular/material/toolbar';
+  import {MatSidenavModule} from '@angular/material/sidenav';
+  import {MatListModule} from '@angular/material/list';
+
 //para Data Picker
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -47,6 +51,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatSelectModule,
         NgxMaterialTimepickerModule,
         MatSlideToggleModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule        
 
     ],
     exports: [
@@ -67,7 +74,11 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatNativeDateModule,
         MatSelectModule,
         NgxMaterialTimepickerModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
+        
     ],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'es-PE' }
