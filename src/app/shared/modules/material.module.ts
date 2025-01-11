@@ -23,6 +23,7 @@ import {
   import {MatToolbarModule} from '@angular/material/toolbar';
   import {MatSidenavModule} from '@angular/material/sidenav';
   import {MatListModule} from '@angular/material/list';
+  import {LayoutModule} from '@angular/cdk/layout';
 
 //para Data Picker
 import { MatNativeDateModule } from '@angular/material/core';
@@ -53,7 +54,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatSlideToggleModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule        
+        MatListModule,
+        LayoutModule        
 
     ],
     exports: [
@@ -77,7 +79,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatSlideToggleModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        LayoutModule
         
     ],
     providers: [

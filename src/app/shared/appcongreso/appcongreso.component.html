@@ -1,25 +1,32 @@
-<mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened>
+<mat-toolbar>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+  </button>
+  <span>App Congreso</span>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item role="listitem">
-        <mat-icon> home</mat-icon>
+      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+        <mat-icon matListItemIcon> home</mat-icon>
         Home
       </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-icon> assignment_ind</mat-icon>
-        Registrar Incripcion
+      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+        <mat-icon matListItemIcon> assignment_ind</mat-icon>
+        Incripcion
       </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-icon> assessment </mat-icon>
+      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+        <mat-icon matListItemIcon> assessment </mat-icon>
         Reportes
       </mat-list-item>
-      <mat-list-item role="listitem">
-        <mat-icon> build </mat-icon>
-        Tablas Auxiliares
+      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+        <mat-icon matListItemIcon> build </mat-icon>
+         Auxiliares
       </mat-list-item>
     </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
