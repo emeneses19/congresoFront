@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar [ngStyle]="{ 'padding-left': sidenav.mode==='side' ? '30px' : '0' }">
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav.opened">close</mat-icon>
@@ -8,7 +8,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+      <mat-list-item role="listitem" [routerLink]="['/']" (click)="sidenav.mode === 'over' && sidenav.toggle()">
         <mat-icon matListItemIcon> home</mat-icon>
         Home
       </mat-list-item>

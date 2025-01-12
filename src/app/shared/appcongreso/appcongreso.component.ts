@@ -21,6 +21,7 @@ ngOnInit(): void {
     }else{
       this.sidenav.mode = "side";
       this.sidenav.open();
+      
     }
   })
 }
