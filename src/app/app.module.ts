@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -23,11 +21,12 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ListaCongresoComponent } from './components/auxiliares/congreso/lista-congreso/lista-congreso.component';
 import { ListaEventoComponent } from './components/auxiliares/evento/lista-evento/lista-evento.component';
 import { ListacategoriaComponent } from './components/auxiliares/categoria/listacategoria/listacategoria.component';
-import { EstadoinscripcionComponent } from './components/estadoinscripcion/estadoinscripcion.component';
 import { EstadodeinscripcionComponent } from './components/auxiliares/estadodeinscripcion/estadodeinscripcion.component';
 import { ListadeestadoinscripcionComponent } from './components/auxiliares/estadodeinscripcion/listadeestadoinscripcion/listadeestadoinscripcion.component';
-import { HeaderComponent } from './shared/header/header.component';
 import { AppcongresoComponent } from './shared/appcongreso/appcongreso.component';
+import { ListaparticipanteComponent } from './components/auxiliares/participante/listaparticipante/listaparticipante.component';
+import { CrearparticipanteavanzadoComponent } from './components/auxiliares/participante/crearparticipanteavanzado/crearparticipanteavanzado.component';
+import { CrearparticipanterapidoComponent } from './components/auxiliares/participante/crearparticipanterapido/crearparticipanterapido.component';
 
 
 @NgModule({
@@ -45,11 +44,12 @@ import { AppcongresoComponent } from './shared/appcongreso/appcongreso.component
     ListaCongresoComponent,
     ListaEventoComponent,
     ListacategoriaComponent,
-    EstadoinscripcionComponent,
     EstadodeinscripcionComponent,
     ListadeestadoinscripcionComponent,
-    HeaderComponent,
     AppcongresoComponent,
+    ListaparticipanteComponent,
+    CrearparticipanteavanzadoComponent,
+    CrearparticipanterapidoComponent,
     
   ],
   imports: [

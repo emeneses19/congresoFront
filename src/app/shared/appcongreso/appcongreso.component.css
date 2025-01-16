@@ -8,12 +8,12 @@ mat-sidenav{
     height: 100%;
 }
 mat-sidenav-content{
-    height: calc(100vh - 98px);
+    height: calc(100svh - 98px);
     border-radius: 10px;
     padding: 16px;
     max-width: 1528px;
     margin: 0 auto;
 }
 mat-sidenav-container{
-    height: calc(100vh - 65px);
+    height: calc(100svh - 65px);
 }

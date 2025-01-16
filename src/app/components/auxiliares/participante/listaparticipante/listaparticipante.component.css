@@ -1,0 +1,20 @@
+.titulo {
+    display: flex;
+    color: var(--color-primario);
+    padding: 10px 20px;
+    border-radius: 0.3rem;
+    box-shadow: 0px 4px 6px #e0e0e0;
+    margin-bottom: 10px;
+   
+}
+
+.titulo mat-icon {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.titulo h3 {
+    margin: 0;
+    font-weight: 500;
+   
+}
