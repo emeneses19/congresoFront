@@ -12,7 +12,7 @@
         <mat-icon matListItemIcon> home</mat-icon>
         Home
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+      <mat-list-item role="listitem" [routerLink]="['/auxiliares/lista-de-participantes']" (click)="sidenav.mode === 'over' && sidenav.toggle()">
         <mat-icon matListItemIcon> assignment_ind</mat-icon>
         Incripcion
       </mat-list-item>
@@ -20,7 +20,7 @@
         <mat-icon matListItemIcon> assessment </mat-icon>
         Reportes
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="sidenav.mode === 'over' && sidenav.toggle()">
+      <mat-list-item role="listitem" [routerLink]="['/auxiliares']" (click)="sidenav.mode === 'over' && sidenav.toggle()">
         <mat-icon matListItemIcon> build </mat-icon>
          Auxiliares
       </mat-list-item>
