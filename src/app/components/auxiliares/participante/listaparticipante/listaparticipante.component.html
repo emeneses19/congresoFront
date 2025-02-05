@@ -1,14 +1,76 @@
 <div class="titulo">
-    <mat-icon matListItemIcon>assignment_ind</mat-icon>
-    <h3>
-        LISTA DE PARTICIPANTES
-    </h3>
+  <mat-icon matListItemIcon>assignment_ind</mat-icon>
+  <h3>
+    LISTA DE PARTICIPANTES
+  </h3>
 </div>
-
-<mat-card appearance="outlined" class="cabecera">
-    <mat-card-content>
-AQUI VA IR TODO
-
-    </mat-card-content>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="acciones-icon">
+      <mat-icon>settings_applications</mat-icon>
+      <p>Acciones</p>
+    </div>
+    <div class="acciones-botones">
+      <button>
+        Editar
+      </button>
+      <button>Crear</button>
+      <button>Crear Avanzado</button>
+    </div>
+  </mat-card-content>
 </mat-card>
+<mat-divider></mat-divider>
 
+<mat-card appearance="outlined" class="seccion_reporte">
+  <mat-card-content>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="codParticipante">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cód. Participante </th>
+          <td mat-cell *matCellDef="let row"> {{row.codParticipante}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="codDocumento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo Doc. </th>
+          <td mat-cell *matCellDef="let row"> {{row.codDocumento}}% </td>
+        </ng-container>
+        <ng-container matColumnDef="numeroDocumento">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+          <td mat-cell *matCellDef="let row"> {{row.numeroDocumento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
+        </ng-container>
+        <ng-container matColumnDef="apellidos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+          <td mat-cell *matCellDef="let row"> {{row.apellidos}} </td>
+        </ng-container>
+        <ng-container matColumnDef="codInstitucionProcedencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Inst.Procedecia </th>
+          <td mat-cell *matCellDef="let row"> {{row.codInstitucionProcedencia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="codCategoria">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+          <td mat-cell *matCellDef="let row"> {{row.codCategoria}} </td>
+        </ng-container>
+        <ng-container matColumnDef="codLugarProcencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Lugar Proced. </th>
+          <td mat-cell *matCellDef="let row"> {{row.codLugarProcencia}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      </table>
+    </div>
+
+
+  </mat-card-content>
+
+
+
+</mat-card>

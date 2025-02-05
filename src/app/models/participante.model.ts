@@ -2,7 +2,7 @@
 
 export class ParticpanteModel {
     codParticipante: string;
-    codDocuento: string;
+    codDocumento: string;
     numeroDocumento: string;
     nombres: string;
     apellidos: string;
@@ -13,7 +13,7 @@ export class ParticpanteModel {
     codLugarProcencia: string;
     constructor(){
         this.codParticipante ='';
-        this.codDocuento = '';
+        this.codDocumento = '';
         this.numeroDocumento = '';
         this.nombres='';
         this.apellidos = '';

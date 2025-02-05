@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 //angular Material
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {  MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,22 +14,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import {
-    MatSlideToggleModule
-  } from '@angular/material/slide-toggle';
-  import {MatToolbarModule} from '@angular/material/toolbar';
-  import {MatSidenavModule} from '@angular/material/sidenav';
-  import {MatListModule} from '@angular/material/list';
-  import {LayoutModule} from '@angular/cdk/layout';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { LayoutModule } from '@angular/cdk/layout';
+
 
 //para Data Picker
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 //para hora importante
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
     declarations: [],
@@ -55,7 +54,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
-        LayoutModule        
+        LayoutModule,
+        
 
     ],
     exports: [
@@ -80,8 +80,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
-        LayoutModule
+        LayoutModule,
         
+
     ],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'es-PE' }
